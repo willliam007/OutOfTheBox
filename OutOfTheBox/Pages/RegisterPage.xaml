@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:OutOfTheBox.Controls"
+             x:Class="OutOfTheBox.Pages.RegisterPage"
+             xmlns:vm="clr-namespace:OutOfTheBox.ViewModels"
+             x:DataType="vm:RegisterViewModel"
+             Title="">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="appName" TargetType="Label" >
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <!--<Setter Property="Margin" Value="0"/>-->
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto, Auto, Auto, *" RowSpacing="15">
+
+        <VerticalStackLayout Margin="0 ,30, 0,0" HorizontalOptions="Center">
+            <Image Source="logo.png" HeightRequest="80"/>
+            <Label Style="{StaticResource appName}" Text="NEN WOAKA" />
+            <Label Style="{StaticResource appName}" Text="SEN"/>
+
+        </VerticalStackLayout>
+
+        <Label Grid.Row="1"
+           FontSize="20" 
+           HorizontalOptions="Center" 
+           Text="Bienvenue !! "/>
+        <VerticalStackLayout Grid.Row="2"
+                         Spacing="15"
+                         Padding="25" >
+            <Image Source="dotnet_bot.png" HeightRequest="50"/>
+            <Border Style="{StaticResource EntryWrapper}" >
+                <controls:NoUnderlineEntry Placeholder="Nom"  TextColor="Black"/> 
+                  
+            <!--<Entry Placeholder="Confirm " TextColor="Black" PlaceholderColor="LightSteelBlue" />-->
+            </Border>
+
+            <Border Style="{StaticResource EntryWrapper}" >
+
+                <controls:NoUnderlineEntry Placeholder="Email"   TextColor="Black"/>
+            </Border>
+            
+            <Border Style="{StaticResource EntryWrapper}" >
+                <controls:NoUnderlineEntry Placeholder="Password" IsPassword="True"  TextColor="Black" Margin="2"/>
+            </Border>
+
+            <Button FontAttributes="Bold" Text="Register" Margin="2"/>
+
+            <Label HorizontalOptions="Center" 
+               Text="Already have an account? Login"
+               TextColor="DarkBlue">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigationToLoginPageCommand}">
+
+                    </TapGestureRecognizer>
+                </Label.GestureRecognizers>
+            </Label>
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage>
