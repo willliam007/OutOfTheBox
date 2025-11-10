@@ -12,18 +12,18 @@
 
     <Grid RowDefinitions="280, Auto, *" RowSpacing="5">
         
-        <Image Grid.Row="0" Source="dotnet_bot.png" 
+        <Image Grid.Row="0" Source="elephant.png" Aspect="AspectFill" 
                HeightRequest="280" 
                VerticalOptions="Start"  />
 
-        <Grid Grid.Row="1" ColumnDefinitions="Auto , * , Auto" Padding="15 ,0">
-            <Label Grid.Column="0" Text="recent trips" Padding="1" FontSize="16"/>
+        <Grid Grid.Row="0" Margin="0, 240, 0 ,0" ColumnDefinitions="Auto , * , Auto" Padding="15 ,0"  >
+            <Label Grid.Column="0" Text="recent trips" Padding="1" FontSize="16" TextColor="White" FontAttributes="Bold"/>
             <Button Grid.Column="2" Style="{StaticResource BtnSm}"
                     Text="+ Add Strips"
                     VerticalOptions="Start" Command="{Binding AddTripCommand}"/>
         </Grid>
 
-        <CollectionView Grid.Row="2" ItemsSource="{Binding Trips}" Margin="15, 0 ">
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Trips}" Margin="15, 0 ">
             <CollectionView.EmptyView>
                 <VerticalStackLayout Margin="25" Padding="0,50,0,0" HorizontalOptions="Center">
                     <Label Text="No Trips Here !!"
@@ -44,9 +44,9 @@
                     <Border StrokeShape="RoundRectangle 15" BackgroundColor="White" 
                             StrokeThickness="0">
                         <VerticalStackLayout>
-                            <Image Source="{Binding Image }" HeightRequest="70"/>
-                            <Label Text="{Binding Title}"/>
-                            <Label Text="{Binding Location}"/>
+                            <Image Source="{Binding Image }" HeightRequest="70" Aspect="AspectFill"/>
+                            <Label Text="{Binding Title}" Padding="10,0" />
+                            <Label Text="{Binding Location}" Padding="10 ,0 " FontSize="12"/>
                         </VerticalStackLayout>
                     </Border>
                 </DataTemplate>

@@ -17,10 +17,10 @@ namespace OutOfTheBox.ViewModels;
     [RelayCommand]
     public void AddTrip() 
     {
-        Trips.Add(new TripModel("logo.png", "Trips 1", "Some location"));
-        Trips.Add(new TripModel("logo.png", "Trips 2", "Saome Location"));
-        Trips.Add(new TripModel("user.png", "Trips 3", "Other Location"));
-        Trips.Add(new TripModel("logo.png", "Trips 4", "Some Location"));
+        Trips.Add(new TripModel("savane.png", "Trips 1", "Garoua"));
+        Trips.Add(new TripModel("elephant", "Trips 2", "parck de waza"));
+        Trips.Add(new TripModel("chute.png", "Trips 3", "Lobé"));
+        Trips.Add(new TripModel("pirogue.png", "Trips 4", "kribi"));
     }
  }
 
