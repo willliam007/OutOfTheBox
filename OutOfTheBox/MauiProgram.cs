@@ -29,7 +29,10 @@ namespace OutOfTheBox
 
             builder.Services.AddSingleton<Pages.MainPage>(); 
             builder.Services.AddSingleton<ViewModels.HomeViewModel>();
-            
+
+            builder.Services.AddSingleton<Pages.TripsPage>();
+            builder.Services.AddSingleton<ViewModels.TripViewModel>();
+
 
 
             return builder.Build();

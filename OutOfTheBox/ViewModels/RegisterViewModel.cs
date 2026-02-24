@@ -1,10 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using OutOfTheBox.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OutOfTheBox.ViewModels
@@ -12,13 +8,28 @@ namespace OutOfTheBox.ViewModels
     public partial class RegisterViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string _username;
+        private string _username = string.Empty;
 
         [ObservableProperty]
-        private string _email;
+        private string _email = string.Empty;
 
         [ObservableProperty]
-        private string _password;
+        private string _password = string.Empty;
+
+        [ObservableProperty]
+        private bool _isLoggingIn;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(PasswordIcon))]
+        private bool _isPassword = true;
+
+        public string PasswordIcon => IsPassword ? "eyeclosed.png" : "eye.png";
+
+        [RelayCommand]
+        private void TogglePasswordVisibility()
+        {
+            IsPassword = !IsPassword;
+        }
 
         [RelayCommand]
         private async Task NavigationToLoginPageAsync()

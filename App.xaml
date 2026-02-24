@@ -1,0 +1,35 @@
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:OutOfTheBox"
+             x:Class="OutOfTheBox.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Style pour les bordures des champs de saisie -->
+            <Style x:Key="EntryWrapper" TargetType="Border">
+                <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}"/>
+                <Setter Property="StrokeThickness" Value="1"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource SubtleLight}, Dark={StaticResource SubtleDark}}"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+
+            <!-- Style global pour les pages -->
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource BackgroundLight}, Dark={StaticResource BackgroundDark}}" />
+            </Style>
+
+            <!-- Style global pour les boutons -->
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="CornerRadius" Value="10"/>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

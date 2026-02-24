@@ -5,62 +5,100 @@
              x:Class="OutOfTheBox.Pages.RegisterPage"
              xmlns:vm="clr-namespace:OutOfTheBox.ViewModels"
              x:DataType="vm:RegisterViewModel"
-             Title="">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style x:Key="appName" TargetType="Label" >
-                <Setter Property="FontSize" Value="24"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
-                <!--<Setter Property="Margin" Value="0"/>-->
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+             Shell.NavBarIsVisible="False">
 
-    <Grid RowDefinitions="Auto, Auto, Auto, *" RowSpacing="15">
+    <ScrollView>
+        <Grid RowDefinitions="240, Auto, *" RowSpacing="0">
 
-        <VerticalStackLayout Margin="0 ,30, 0,0" HorizontalOptions="Center">
-            <Image Source="logo.png" HeightRequest="80"/>
-            <Label Style="{StaticResource appName}" Text="NEN WOAKA" />
-            <Label Style="{StaticResource appName}" Text="SEN"/>
+            <!-- En-tête avec image -->
+            <Grid Grid.Row="0">
+                <Image Source="chute.png" Aspect="AspectFill" />
+                <BoxView Background="{StaticResource OverlayGradient}" />
+                <Label Text="Rejoignez-nous" FontSize="40"
+                       Style="{StaticResource appName}" 
+                       VerticalOptions="Center" />
+            </Grid>
 
-        </VerticalStackLayout>
+            <!-- Message d'accueil -->
+            <Label Grid.Row="1" 
+                   FontFamily="PoppinsRegular"
+                   FontSize="18" 
+                   HorizontalOptions="Center" 
+                   Text="Créez votre compte 🌍"
+                   Margin="0,30,0,20"/>
 
-        <Label Grid.Row="1"
-           FontSize="20" 
-           HorizontalOptions="Center" 
-           Text="Bienvenue !! "/>
-        <VerticalStackLayout Grid.Row="2"
-                         Spacing="15"
-                         Padding="25" >
-            <Image Source="dotnet_bot.png" HeightRequest="50"/>
-            <Border Style="{StaticResource EntryWrapper}" >
-                <controls:NoUnderlineEntry Placeholder="Nom"  TextColor="Black"/> 
-                  
-            <!--<Entry Placeholder="Confirm " TextColor="Black" PlaceholderColor="LightSteelBlue" />-->
-            </Border>
+            <!-- Formulaire -->
+            <VerticalStackLayout Grid.Row="2" Spacing="20" Padding="30,0,30,40">
+                
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Nom d'utilisateur" Style="{StaticResource FormLabel}"/>
+                    <Border Style="{StaticResource EntryWrapper}">
+                        <Grid ColumnDefinitions="Auto, *" VerticalOptions="Center" HeightRequest="50">
+                            <Image Source="user.png" Style="{StaticResource EntryIcon}" />
+                            <controls:NoUnderlineEntry Grid.Column="1" Margin="04,06,00,00"
+                                                       Placeholder="Votre nom" 
+                                                       Text="{Binding Username}" 
+                                                       Style="{StaticResource ThemedNoUnderlineEntry}" />
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
 
-            <Border Style="{StaticResource EntryWrapper}" >
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Adresse e-mail" Style="{StaticResource FormLabel}"/>
+                    <Border Style="{StaticResource EntryWrapper}">
+                        <Grid ColumnDefinitions="Auto, *" VerticalOptions="Center" HeightRequest="50">
+                            <Image Source="mail.png" Style="{StaticResource EntryIcon}" />
+                            <controls:NoUnderlineEntry Grid.Column="1" Margin="04,06,00,00"
+                                                       Placeholder="nom@exemple.com" 
+                                                       Text="{Binding Email}" 
+                                                       Keyboard="Email" 
+                                                       Style="{StaticResource ThemedNoUnderlineEntry}" />
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
 
-                <controls:NoUnderlineEntry Placeholder="Email"   TextColor="Black"/>
-            </Border>
-            
-            <Border Style="{StaticResource EntryWrapper}" >
-                <controls:NoUnderlineEntry Placeholder="Password" IsPassword="True"  TextColor="Black" Margin="2"/>
-            </Border>
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Mot de passe" Style="{StaticResource FormLabel}"/>
+                    <Border Style="{StaticResource EntryWrapper}">
+                        <Grid ColumnDefinitions="Auto, *, Auto" VerticalOptions="Center" HeightRequest="50">
+                            <Image Source="password.png" Style="{StaticResource EntryIcon}" />
+                            <controls:NoUnderlineEntry Grid.Column="1" Margin="04,06,00,00"
+                               Placeholder="••••••••" 
+                               Text="{Binding Password}" 
+                               IsPassword="{Binding IsPassword}" 
+                               Style="{StaticResource ThemedNoUnderlineEntry}" />
+                            <ImageButton Grid.Column="2" 
+                               Source="{Binding PasswordIcon}" 
+                               Command="{Binding TogglePasswordVisibilityCommand}" 
+                               Style="{StaticResource EyeIcon}" />
+                        </Grid>
+                    </Border>
+                    <Label Text="Au moins 8 caractères" 
+                           FontSize="12" 
+                           TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}"
+                           Margin="4,4,0,0"/>
+                    
+                </VerticalStackLayout>
 
-            <Button FontAttributes="Bold" Text="Register" Margin="2"/>
+                <Button Text="Créer mon compte" 
+                        Margin="0,12,0,0" />
 
-            <Label HorizontalOptions="Center" 
-               Text="Already have an account? Login"
-               TextColor="DarkBlue">
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavigationToLoginPageCommand}">
-
-                    </TapGestureRecognizer>
-                </Label.GestureRecognizers>
-            </Label>
-        </VerticalStackLayout>
-
-    </Grid>
+                <Label HorizontalOptions="Center" Margin="0,16,0,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Déjà un compte ? " FontFamily="PoppinsRegular"/>
+                            <Span Text="Connectez-vous" 
+                                  TextColor="{StaticResource Primary}" 
+                                  FontFamily="PoppinsBold"
+                                  TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NavigationToLoginPageCommand}"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

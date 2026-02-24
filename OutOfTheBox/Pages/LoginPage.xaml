@@ -7,89 +7,93 @@
              x:DataType="vm:LoginViewModel"
              Shell.NavBarIsVisible="False">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style x:Key="appName" TargetType="Label" >
-                <Setter Property="FontSize" Value="28"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-    
-    <Grid RowDefinitions="Auto, Auto, Auto, *" RowSpacing="10" Margin="0,10,0,0">
-        
-        <VerticalStackLayout Margin="0 ,0, 0,190" HorizontalOptions="Center">
-            <Image Source="savane.png" Aspect="Center" HeightRequest="100" />
-        </VerticalStackLayout>
-        
-        <Grid Grid.Row="0" Margin="10, 180, 0 , 0"  Padding="1 ,0" VerticalOptions="Center" HorizontalOptions="Center">
-            <VerticalStackLayout  HorizontalOptions="Center" Spacing="0" >
-                <!--<Label Style="{StaticResource appName}" Text="NEN"  TextColor="Black" FontSize="75" FontAttributes="Italic"/>-->
-                <Label Style="{StaticResource appName}" Text="WOAKA" FontSize="60" FontAttributes="Italic" TextColor="White"/>
+    <ScrollView>
+        <Grid RowDefinitions="240, Auto, *" RowSpacing="0">
+
+            <!-- En-tête avec image -->
+            <Grid Grid.Row="0">
+                <Image Source="savane.png" Aspect="AspectFill" />
+                <BoxView Background="{StaticResource OverlayGradient}" />
+                <VerticalStackLayout VerticalOptions="Center" Spacing="0">
+                    <Label Text="NEN" Style="{StaticResource appName}" Margin="0,-8,0,0"/>
+                    <Label Text="WOAKA" Style="{StaticResource appName}" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- Message de bienvenue -->
+            <Label Grid.Row="1" 
+                   FontFamily="PoppinsRegular"
+                   FontSize="18" 
+                   HorizontalOptions="Center" 
+                   Text="Ravis de vous revoir 😎"
+                   Margin="0,30,0,20"/>
+            
+            <!-- Formulaire -->
+            <VerticalStackLayout Grid.Row="2" Spacing="20" Padding="30,0,30,40">
+                
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Adresse e-mail" Style="{StaticResource FormLabel}"/>
+                    <Border Style="{StaticResource EntryWrapper}">
+                        <Grid ColumnDefinitions="Auto, *" VerticalOptions="Center" HeightRequest="50">
+                            <Image Source="mail.png" Style="{StaticResource EntryIcon}" />
+                            <controls:NoUnderlineEntry Grid.Column="1" Margin="5,5,00,00"
+                                                       Placeholder="nom@exemple.com" 
+                                                       Text="{Binding Username}" 
+                                                       Keyboard="Email" 
+                                                       Style="{StaticResource ThemedNoUnderlineEntry}" />
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Mot de passe" Style="{StaticResource FormLabel}"/>
+                    <Border Style="{StaticResource EntryWrapper}">
+                        <Grid ColumnDefinitions="Auto, *, Auto" VerticalOptions="Center" HeightRequest="50">
+                            <Image Source="password.png" Style="{StaticResource EntryIcon}" />
+                            <controls:NoUnderlineEntry Grid.Column="1" Margin="5,5,00,00" 
+                                                       Placeholder="••••••••" 
+                                                       Text="{Binding Password}" 
+                                                       IsPassword="{Binding IsPassword}" 
+                                                       Style="{StaticResource ThemedNoUnderlineEntry}" />
+                            <ImageButton Grid.Column="2" 
+                                         Source="{Binding PasswordIcon}" 
+                                         Command="{Binding TogglePasswordVisibilityCommand}" 
+                                         Style="{StaticResource EyeIcon}" />
+                        </Grid>
+                    </Border>
+                    <Label Text="Mot de passe oublié ?" 
+                           HorizontalOptions="End" 
+                           FontSize="13"
+                           TextColor="{StaticResource Primary}"
+                           Margin="0,4,0,0"/>
+                </VerticalStackLayout>
+
+                <Button Text="Connexion" 
+                        Command="{Binding LoginCommand}" 
+                        Margin="0,12,0,0" />
+                
+                <ActivityIndicator IsRunning="{Binding IsLoggingIn}" 
+                                   IsVisible="{Binding IsLoggingIn}" 
+                                   Color="{StaticResource Primary}"
+                                   HorizontalOptions="Center" 
+                                   Margin="0,8,0,0"/>
+
+                <Label HorizontalOptions="Center" Margin="0,16,0,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Pas encore de compte ? " FontFamily="PoppinsRegular"/>
+                            <Span Text="Inscrivez-vous" 
+                                  TextColor="{StaticResource Primary}" 
+                                  FontFamily="PoppinsBold"
+                                  TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NavigationToRegisterpageCommand}"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
             </VerticalStackLayout>
         </Grid>
-
-        <Label Grid.Row="2"
-               FontSize="20" 
-               Margin="1"
-               HorizontalOptions="Center" 
-               Text="Ravis de vous Revoir 😎"/>
-        <VerticalStackLayout Grid.Row="2"
-                             Spacing="10"
-                             Padding="25" >
-
-            <Image Source="dotnet_bot.png" HeightRequest="50"/>
-            <Label Text="Adresse e-mail" Margin="8,0,0,0" />
-            <Border Style="{StaticResource EntryWrapper}" >
-                <Grid ColumnDefinitions="Auto, *" ColumnSpacing="10" VerticalOptions="Center">
-                    <Image Source="mail.png" HeightRequest="20" Margin="5,0,0,0" />
-                    <controls:NoUnderlineEntry Grid.Column="1" 
-                                               Placeholder="Votre Adresse e-mail"
-                                               BackgroundColor ="AliceBlue"
-                                               TextColor="Black"
-                                               Keyboard="Email"/>
-                </Grid>
-            </Border>
-            <Label Text="Mot de passe" Margin="8,0,0,0"/>
-            <Border Style="{StaticResource EntryWrapper}" >
-                <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="10" VerticalOptions="Center">
-                    <Image Source="password.png" HeightRequest="20" Margin="5,0,0,0" />
-                    <controls:NoUnderlineEntry Grid.Column="1" 
-                                               Placeholder="Votre mot de passe " 
-                                               IsPassword="{Binding IsPassword}" 
-                                               BackgroundColor="AliceBlue" 
-                                               TextColor="Black" 
-                                               Margin="2"/>
-                    <ImageButton Grid.Column="2" 
-                                 Source="{Binding PasswordIcon}" 
-                                 Command="{Binding TogglePasswordVisibilityCommand}"
-                                 HeightRequest="20" 
-                                 WidthRequest="25"
-                                 Margin="0,0,5,0"
-                                 VerticalOptions="Center"/>
-                </Grid>
-            </Border>
-            <Label Text="Mot de passe oublier?" HorizontalOptions="End" Margin="1" Padding="8"/>
-
-            <Button FontAttributes="Bold" Text="Connexion " Command="{Binding LoginCommand}"/>
-            
-            <ActivityIndicator IsRunning="{Binding IsLoggingIn}" IsVisible="{Binding IsLoggingIn}" HorizontalOptions="Center" />
-
-            <Label HorizontalOptions="Center">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="Don't have an account? "/>
-                        <Span Text="Register" TextColor="DarkBlue" TextDecorations="Underline">
-                            <Span.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding NavigationToRegisterpageCommand}"/>
-                            </Span.GestureRecognizers>
-                        </Span>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-        </VerticalStackLayout>
-        
-    </Grid>
-    
+    </ScrollView>
 </ContentPage>

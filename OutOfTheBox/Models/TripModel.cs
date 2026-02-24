@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace OutOfTheBox.Models
 {
-    public record TripModel(String Image, String  Title, String Location);
+    public record TripModel(String Image, String  Title, String Location, DateTime date);
    
 }

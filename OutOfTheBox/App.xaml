@@ -1,7 +1,7 @@
 ﻿<?xml version = "1.0" encoding = "UTF-8" ?>
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:OutOfTheBox"
+             xmlns:controls="clr-namespace:OutOfTheBox.Controls"
              x:Class="OutOfTheBox.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -9,21 +9,95 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <Style x:Key="EntryWrapper" TargetType="Border" >
-                <Setter Property="Padding" Value="10,0"/>
-                <Setter Property="StrokeThickness" Value="0"/>
-                <Setter Property="BackgroundColor" Value="AliceBlue"/>
-                <Setter Property="StrokeShape" Value="RoundRectangle 22"/>
-                <!--<Setter Property="Margin" Value="0"/>-->
-            </Style>
-            <Style x:Key="BtnSm" TargetType="Button">
-                <Setter  Property="MinimumHeightRequest" Value="30"/>
-                <Setter  Property="HeightRequest" Value="30"/>
-                <Setter  Property="CornerRadius" Value="15"/>   
-                <Setter  Property="FontSize" Value="12"/>
-                <Setter  Property="Padding" Value="10, 5"/>
 
+            <!-- Dégradé pour les overlays d'images -->
+            <LinearGradientBrush x:Key="OverlayGradient" EndPoint="0,1">
+                <GradientStop Color="#00000000" Offset="0.3" />
+                <GradientStop Color="#CC221710" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <!-- Style pour le nom de l'application -->
+            <Style x:Key="appName" TargetType="Label">
+                <Setter Property="FontFamily" Value="PoppinsBold"/>
+                <Setter Property="FontSize" Value="42"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="CharacterSpacing" Value="2"/>
+                <Setter Property="Shadow">
+                    <Shadow Brush="Black" Offset="0,3" Radius="8" Opacity="0.4" />
+                </Setter>
             </Style>
+
+            <!-- Style pour les labels de formulaire -->
+            <Style x:Key="FormLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="PoppinsRegular"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextLight}, Dark={StaticResource TextDark}}"/>
+                <Setter Property="Margin" Value="4,0,0,6"/>
+            </Style>
+
+            <!-- Style pour les icônes dans les champs -->
+            <Style x:Key="EntryIcon" TargetType="Image">
+                <Setter Property="HeightRequest" Value="20"/>
+                <Setter Property="WidthRequest" Value="20"/>
+                <Setter Property="Margin" Value="12,0,0,0"/>
+                <Setter Property="Opacity" Value="0.6"/>
+            </Style>
+
+            <!-- Style de base pour Entry -->
+            <Style x:Key="ThemedEntry" TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextLight}, Dark={StaticResource TextDark}}"/>
+                <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource PlaceholderLight}, Dark={StaticResource PlaceholderDark}}"/>
+                <Setter Property="FontFamily" Value="PoppinsRegular"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Margin" Value="0,0,12,0"/>
+            </Style>
+
+            <!-- Style pour NoUnderlineEntry (basé sur ThemedEntry) -->
+            <Style x:Key="ThemedNoUnderlineEntry" TargetType="controls:NoUnderlineEntry" BasedOn="{StaticResource ThemedEntry}">
+            </Style>
+
+            <!-- Style pour l'icône de l'œil -->
+            <Style x:Key="EyeIcon" TargetType="ImageButton">
+                <Setter Property="HeightRequest" Value="24"/>
+                <Setter Property="WidthRequest" Value="30"/>
+                <Setter Property="Margin" Value="0,0,10,0"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="Opacity" Value="0.7"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
+            <!-- Style pour les bordures des champs -->
+            <Style x:Key="EntryWrapper" TargetType="Border">
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark={StaticResource SubtleDark}}"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 12"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Shadow">
+                    <Shadow Brush="Black" Offset="0,2" Radius="8" Opacity="0.08" />
+                </Setter>
+            </Style>
+
+            <!-- Style global pour les pages -->
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource BackgroundLight}, Dark={StaticResource BackgroundDark}}"/>
+            </Style>
+
+            <!-- Style global pour les boutons -->
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="CornerRadius" Value="12"/>
+                <Setter Property="FontFamily" Value="PoppinsBold"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="HeightRequest" Value="52"/>
+                <Setter Property="Shadow">
+                    <Shadow Brush="{StaticResource Primary}" Offset="0,4" Radius="12" Opacity="0.3" />
+                </Setter>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

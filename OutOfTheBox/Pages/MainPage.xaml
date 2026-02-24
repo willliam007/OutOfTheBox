@@ -4,56 +4,93 @@
              x:Class="OutOfTheBox.Pages.MainPage"
              xmlns:vm="clr-namespace:OutOfTheBox.ViewModels"
              xmlns:model="clr-namespace:OutOfTheBox.Models"
-             Shell.BackgroundColor="{StaticResource Primary}"
-             Shell.TitleColor="White"
-             BackgroundColor="#efefef"
+             Shell.NavBarIsVisible="False"
              Title="NenWoaka"
              x:DataType="vm:HomeViewModel">
 
-    <Grid RowDefinitions="280, Auto, *" RowSpacing="5">
+    <Grid RowDefinitions="220, *">
         
-        <Image Grid.Row="0" Source="elephant.png" Aspect="AspectFill" 
-               HeightRequest="280" 
-               VerticalOptions="Start"  />
-
-        <Grid Grid.Row="0" Margin="0, 240, 0 ,0" ColumnDefinitions="Auto , * , Auto" Padding="15 ,0"  >
-            <Label Grid.Column="0" Text="recent trips" Padding="1" FontSize="16" TextColor="White" FontAttributes="Bold"/>
-            <Button Grid.Column="2" Style="{StaticResource BtnSm}"
-                    Text="+ Add Strips"
-                    VerticalOptions="Start" Command="{Binding AddTripCommand}"/>
+        <!-- En-tête -->
+        <Grid Grid.Row="0">
+            <Image Source="elephant.png" Aspect="AspectFill" />
+            <BoxView Background="{StaticResource OverlayGradient}" />
+            
+            <VerticalStackLayout Padding="24" VerticalOptions="End" Spacing="16">
+                <Label Text="Bienvenue !" 
+                       FontFamily="PoppinsBold"
+                       FontSize="36" 
+                       TextColor="White" />
+                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="12">
+                    <Label Grid.Column="0" 
+                           Text="Vos voyages" 
+                           FontFamily="PoppinsRegular"
+                           FontSize="16" 
+                           TextColor="White" 
+                           VerticalOptions="Center"
+                           Opacity="0.9"/>
+                    <Button Grid.Column="1" 
+                            Text="+ Ajouter" 
+                            Command="{Binding AddTripCommand}" 
+                            HeightRequest="38" 
+                            CornerRadius="19"
+                            FontSize="14"
+                            Padding="16,0"/>
+                </Grid>
+            </VerticalStackLayout>
         </Grid>
 
-        <CollectionView Grid.Row="1" ItemsSource="{Binding Trips}" Margin="15, 0 ">
+        <!-- Liste des voyages -->
+        <CollectionView Grid.Row="1" 
+                        ItemsSource="{Binding Trips}" 
+                        Margin="20,24"
+                        SelectionMode="None">
             <CollectionView.EmptyView>
-                <VerticalStackLayout Margin="25" Padding="0,50,0,0" HorizontalOptions="Center">
-                    <Label Text="No Trips Here !!"
-                           FontSize="25" TextColor="DarkGray"/>
+                <VerticalStackLayout Spacing="16" VerticalOptions="Center" Padding="40">
+                    <Label Text="📍" FontSize="64" HorizontalOptions="Center" Opacity="0.3"/>
+                    <Label Text="Aucun voyage enregistré" 
+                           HorizontalOptions="Center" 
+                           FontFamily="PoppinsBold"
+                           FontSize="18" 
+                           TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"/>
+                    <Label Text="Commencez par ajouter votre premier voyage !" 
+                           HorizontalOptions="Center" 
+                           FontSize="14" 
+                           TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray500}}"
+                           HorizontalTextAlignment="Center"/>
                 </VerticalStackLayout>
             </CollectionView.EmptyView>
-            <CollectionView.ItemsLayout >
-                <GridItemsLayout 
-                    Span="2" 
-                    HorizontalItemSpacing="15" 
-                    VerticalItemSpacing="15" 
-                    Orientation="Vertical">
-                    
-                </GridItemsLayout>
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Span="2" 
+                                 HorizontalItemSpacing="16" 
+                                 VerticalItemSpacing="16" 
+                                 Orientation="Vertical" />
             </CollectionView.ItemsLayout> 
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="model:TripModel" >
-                    <Border StrokeShape="RoundRectangle 15" BackgroundColor="White" 
-                            StrokeThickness="0">
-                        <VerticalStackLayout>
-                            <Image Source="{Binding Image }" HeightRequest="70" Aspect="AspectFill"/>
-                            <Label Text="{Binding Title}" Padding="10,0" />
-                            <Label Text="{Binding Location}" Padding="10 ,0 " FontSize="12"/>
-                        </VerticalStackLayout>
+                <DataTemplate x:DataType="model:TripModel">
+                    <Border StrokeShape="RoundRectangle 16" 
+                            StrokeThickness="0" 
+                            BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource SubtleDark}}">
+                        <Border.Shadow>
+                            <Shadow Brush="Black" Offset="0,4" Radius="12" Opacity="0.1" />
+                        </Border.Shadow>
+                        <Grid RowDefinitions="120, Auto">
+                            <Border Grid.Row="0" StrokeShape="RoundRectangle 16,16,0,0" StrokeThickness="0">
+                                <Image Source="{Binding Image}" Aspect="AspectFill"/>
+                            </Border>
+                            <VerticalStackLayout Grid.Row="1" Padding="12" Spacing="4">
+                                <Label Text="{Binding Title}" 
+                                       FontFamily="PoppinsBold"
+                                       FontSize="14" 
+                                       LineBreakMode="TailTruncation"/>
+                                <Label Text="{Binding Location}" 
+                                       FontFamily="PoppinsRegular"
+                                       FontSize="12" 
+                                       TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}"/>
+                            </VerticalStackLayout>
+                        </Grid>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        
     </Grid>
-   
-
 </ContentPage>

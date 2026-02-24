@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Palette de couleurs de l'application -->
+    <Color x:Key="Primary">#D06B3E</Color>
+    <Color x:Key="Accent">#EAA824</Color>
+
+    <!-- Couleurs pour le thème clair -->
+    <Color x:Key="BackgroundLight">#F5F0E8</Color>
+    <Color x:Key="TextLight">#333333</Color>
+    <Color x:Key="BorderLight">#DCD0C0</Color>
+    <Color x:Key="SubtleLight">#ECE4D9</Color>
+    <Color x:Key="PlaceholderLight">#887969</Color>
+
+    <!-- Couleurs pour le thème sombre -->
+    <Color x:Key="BackgroundDark">#221710</Color>
+    <Color x:Key="TextDark">#E5E5E5</Color>
+    <Color x:Key="BorderDark">#44382F</Color>
+    <Color x:Key="SubtleDark">#30241A</Color>
+    <Color x:Key="PlaceholderDark">#A09080</Color>
+
+</ResourceDictionary>

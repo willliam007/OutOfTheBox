@@ -33,9 +33,9 @@
 
         <ShellContent
         Title="Trips"
-        ContentTemplate="{DataTemplate pages:RegisterPage}"
+        ContentTemplate="{DataTemplate pages:TripsPage}"
             Icon="directions.png"
-        Route="RegisterPage" />
+        Route="TripsPage" />
 
         <ShellContent
         Title="Add Trips"
